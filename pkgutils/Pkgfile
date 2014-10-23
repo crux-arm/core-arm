@@ -1,4 +1,4 @@
-# Description: A set of utilities to manage software packages 
+# Description: A set of utilities to manage software packages
 # URL: http://crux.nu/gitweb/?p=tools/pkgutils.git
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
@@ -6,13 +6,15 @@
 
 name=pkgutils
 version=5.36
-release=3
+release=4
 source=(http://crux.nu/files/$name-$version.tar.xz \
         pkgmk.conf)
 
 build () {
   cd $name-$version
-  make DESTDIR=$PKG install MANDIR=/usr/share/man
+
+  sed -i -e "s|\--static||g" -e "s|\-static||g" Makefile
+  make DESTDIR=$PKG install
 
   install -D -m 0644 $SRC/pkgmk.conf $PKG/etc/pkgmk.conf
 }
