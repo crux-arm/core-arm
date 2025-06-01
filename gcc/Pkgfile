@@ -5,7 +5,7 @@
 # Depends on: libmpc zstd
 
 name=gcc
-version=14.2.0
+version=14.3.0
 release=1
 source=(https://sourceware.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz \
         $name-nocheck-fixincludes.patch)
