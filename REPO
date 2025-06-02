@@ -27,9 +27,9 @@ f:d2dd922afe0f8a376292ded5eae1a7eb:gcc/Pkgfile
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:0a4ff1a49b94567ca211ff8e78164cf4:wireless-tools/.footprint
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
-f:4bf021a563584b84f7b7e1a475f163ac:kbd/.signature
-f:cedc5025aefdb42a0f4713fce634831d:kbd/.footprint
-f:007e25b267ac5e080c724e3abd60fc38:kbd/Pkgfile
+f:929a44029b7168abc3a0d49efdbc3b0d:kbd/.signature
+f:979d8e162b2b46fc6552dc51a126983a:kbd/.footprint
+f:5fb2b012be7bfc06f679d2a0c6916f6c:kbd/Pkgfile
 f:93464384634f815bf46a995f74823c5e:filesystem/passwd
 f:d41d8cd98f00b204e9800998ecf8427e:filesystem/motd
 f:a79aae150aa240b06d52cc22d41bd3b6:filesystem/shadow
