@@ -89,9 +89,9 @@ f:653b4ec8b85f812d7b82d02fc82a2379:ports/core-arm.httpup
 f:8cc84b5ed58114c20bf556774a9d4278:ports/core-arm.pub
 f:2d59fdb40babae99f1d8b74740e610c5:ports/Pkgfile
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:7b84f7e42fea3abe1270a2e3401f74f4:python3/.signature
-f:bcdd5bcab4b1fcd134e28978c53b8374:python3/.footprint
-f:8e77e84a3885258f4f3041bd708f4fbb:python3/Pkgfile
+f:56108260aa42c998a5acf4d967c964c1:python3/.signature
+f:bf31761c07edad79a6b689e8ec552147:python3/.footprint
+f:3fec8b5125ed4bbbe1cbdcb229ef8e6c:python3/Pkgfile
 f:5ec27799afd019e5ef0fa83a71495ddb:pkgutils/pkgmk.conf
 f:4be6b876c75ba6d8bebad03620e8f3b8:pkgutils/.signature
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
