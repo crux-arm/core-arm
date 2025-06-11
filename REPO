@@ -36,12 +36,12 @@ f:a79aae150aa240b06d52cc22d41bd3b6:filesystem/shadow
 f:915cf64e2ab613887db6ce2e2c41eeb4:filesystem/fstab
 f:dc4ff0c96d8dcd2141febc8b766e9a6b:filesystem/shells
 f:e020ea1ffde201a72d1b04af1b6937f3:filesystem/issue
-f:aee9c5913f95c24623cd464b16468622:filesystem/.signature
+f:d98cd51e5fee9e1a6e5d4a2426aeda5b:filesystem/.signature
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
 f:a0bb1d24d8d1728a4d9d4bbdbba4237d:filesystem/group
 f:346ede8d637940e2898cd29c56a37d30:filesystem/mime.types
 f:4faaa4e1ba24038f8638a0cae5046cfb:filesystem/securetty
-f:010e5b16c5337391818de8dd21cc4035:filesystem/Pkgfile
+f:792cf984d1851895fe6e56404272cc8e:filesystem/Pkgfile
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
 f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
