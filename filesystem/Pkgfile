@@ -5,7 +5,7 @@
 
 name=filesystem
 version=3.8
-release=1
+release=2
 source=(issue motd shells group passwd shadow securetty fstab mime.types)
 
 build() {
@@ -79,10 +79,10 @@ EOF
   # /etc/os-release
 cat > $PKG/etc/os-release << EOF
 NAME=CRUX-ARM
-VERSION="$version"
+VERSION_ID="$version"
 ID=crux-arm
 PRETTY_NAME="CRUX-ARM"
-HOME_URL="https://crux-arm.nu/"
-BUG_REPORT_URL="https://crux-arm.nu/bugs/"
+HOME_URL="https://crux-arm.nu"
+BUG_REPORT_URL="https://crux-arm.nu/bugs"
 EOF
 }
