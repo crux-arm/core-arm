@@ -12,10 +12,16 @@ source=(https://www.python.org/ftp/python/${version%rc*}/Python-$version.tar.xz)
 build() {
   cd Python-$version
 
+  sed -i -e "s|-flto |-flto=4 |g" configure configure.ac
   sed -i -e "s|^#.* /usr/local/bin/python|#!/usr/bin/python3|" Lib/cgi.py
-
-  # PGO should be done with -O3
-  CFLAGS="${CFLAGS/-O2/-O3}"
+  CFLAGS="${CFLAGS/-O2/-O3} -ffat-lto-objects"
+  local _pgojobs=$(nproc)
+  export PROFILE_TASK="-m test -j${_pgojobs} --pgo-extended -x test_gdb -u-network"
+  PROFILE_TASK+=" -x test_socket -x test_asyncio -x test_httpservers -x test_logging -x test_multiprocessing_fork -x test_xmlrpc"
+  local -x LC_ALL=C.UTF-8
+  export SETUPTOOLS_USE_DISTUTILS=stdlib
+  local -x COLUMNS=80
+  local -x PYTHONDONTWRITEBYTECODE=
 
   # Ensure that we are using the system copy of various libraries
   rm -r Modules/expat
@@ -30,10 +36,11 @@ build() {
     --prefix=/usr \
     --enable-shared \
     --enable-ipv6 \
+    --enable-optimizations \
     --enable-loadable-sqlite-extensions \
     --with-computed-gotos \
     --with-dbmliborder=gdbm:ndbm \
-    --without-lto \
+    --with-lto \
     --with-system-expat \
     --with-system-ffi \
     --with-system-libmpdec \
