@@ -79,9 +79,9 @@ f:1ae00be331fba3e50d2d40d011789d7f:ninja/.signature
 f:3fec8b5125ed4bbbe1cbdcb229ef8e6c:python3/Pkgfile
 f:bf31761c07edad79a6b689e8ec552147:python3/.footprint
 f:56108260aa42c998a5acf4d967c964c1:python3/.signature
-f:636e6518eda69ed931f5fe58178ab672:util-linux/Pkgfile
-f:d5dcaa4e87d6223b198bd82ad19cc7ff:util-linux/.footprint
-f:7a5d33925fce69276cd1f95c737313e9:util-linux/.signature
+f:e9fe86990ce4d711b8c52063ad0eb35a:util-linux/Pkgfile
+f:134d5306a129c7dd5570dbc863d85cab:util-linux/.footprint
+f:7ef3b987d704b136f2e7f14e87d03858:util-linux/.signature
 f:ffd59b0f7c8b5d66cdc3a5f33fa50e57:glibc/glibc-2.39-fhs-1.patch
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
 f:518de5e52f9166e58ed613a0d636e774:glibc/locale.gen.in
