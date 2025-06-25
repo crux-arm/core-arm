@@ -1,0 +1,47 @@
+--- meson.build.orig	2025-06-24 15:22:05.354159731 +0200
++++ meson.build	2025-06-24 15:23:42.751319116 +0200
+@@ -1260,7 +1260,6 @@
+ if opt and not is_disabler(exe)
+   exes += exe
+   manadocs += bits_manadocs
+-  bashcompletions += ['bits']
+ endif
+ 
+ opt = not get_option('build-col').require(is_glibc).disabled()
+@@ -1354,8 +1353,7 @@
+   pg_sources,
+   link_with : lib_common,
+   include_directories : includes,
+-  dependencies : [lib_tinfo,
+-                  curses_libs],
++  dependencies : [curses_libs],
+   install_dir : usrbin_exec_dir,
+   install : opt,
+   build_by_default : opt)
+@@ -1370,8 +1368,7 @@
+   'ul',
+   ul_sources,
+   include_directories : includes,
+-  dependencies : [lib_tinfo,
+-                  curses_libs],
++  dependencies : [curses_libs],
+   install_dir : usrbin_exec_dir,
+   install : opt,
+   build_by_default : opt)
+@@ -1466,7 +1463,6 @@
+ if opt and not is_disabler(exe)
+   exes += exe
+   manadocs += choom_manadocs
+-  bashcompletions += ['choom']
+ endif
+ 
+ has_seminfo_type = cc.has_type('struct seminfo', args : '-D_GNU_SOURCE', prefix : '#include <sys/sem.h>')
+@@ -3411,7 +3407,7 @@
+ if opt and not is_disabler(exe)
+   exes += [exe, exe2, exe3, exe4, exe5]
+   manadocs += schedutils_manadocs
+-  bashcompletions += ['chrt', 'ionice', 'taskset', 'uclampset', 'coresched']
++  bashcompletions += ['chrt', 'ionice', 'taskset', 'uclampset']
+ endif
+ 
+ ############################################################
