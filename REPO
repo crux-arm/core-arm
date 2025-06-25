@@ -82,7 +82,7 @@ f:56108260aa42c998a5acf4d967c964c1:python3/.signature
 f:365cbfc7bddfbbe6aa13ec1a0cfa7f52:util-linux/meson.diff
 f:e9fe86990ce4d711b8c52063ad0eb35a:util-linux/Pkgfile
 f:134d5306a129c7dd5570dbc863d85cab:util-linux/.footprint
-f:7ef3b987d704b136f2e7f14e87d03858:util-linux/.signature
+f:d1c7fc88908b887358f1b16eb0065aa5:util-linux/.signature
 f:ffd59b0f7c8b5d66cdc3a5f33fa50e57:glibc/glibc-2.39-fhs-1.patch
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
 f:518de5e52f9166e58ed613a0d636e774:glibc/locale.gen.in
