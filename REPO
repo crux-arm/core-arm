@@ -79,6 +79,7 @@ f:1ae00be331fba3e50d2d40d011789d7f:ninja/.signature
 f:3fec8b5125ed4bbbe1cbdcb229ef8e6c:python3/Pkgfile
 f:bf31761c07edad79a6b689e8ec552147:python3/.footprint
 f:56108260aa42c998a5acf4d967c964c1:python3/.signature
+f:365cbfc7bddfbbe6aa13ec1a0cfa7f52:util-linux/meson.diff
 f:e9fe86990ce4d711b8c52063ad0eb35a:util-linux/Pkgfile
 f:134d5306a129c7dd5570dbc863d85cab:util-linux/.footprint
 f:7ef3b987d704b136f2e7f14e87d03858:util-linux/.signature
