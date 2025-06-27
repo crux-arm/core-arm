@@ -2,6 +2,7 @@ d:libgmp
 d:pkgutils
 d:gcc
 d:kbd
+d:rhash
 d:binutils
 d:filesystem
 d:ports
@@ -28,6 +29,10 @@ f:5fb2b012be7bfc06f679d2a0c6916f6c:kbd/Pkgfile
 f:979d8e162b2b46fc6552dc51a126983a:kbd/.footprint
 f:929a44029b7168abc3a0d49efdbc3b0d:kbd/.signature
 f:d32239bcb673463ab874e80d47fae504:COPYING
+f:6267683dd026e1b85ed415e2960330c1:rhash/Pkgfile
+f:4a0af4c1fecebb0d3cf2c7a1345f76ed:rhash/.footprint
+f:ea239d1c4d20d7d246866e376d0f366e:rhash/.signature
+f:48002ab4cc77f01f4bdad6bf4a8f370e:rhash/.md5sum
 f:bf6fd86fad8c050d38215ef971d2cc9e:binutils/Pkgfile
 f:17d271e51ce24e9097a8b1315bdd7670:binutils/.footprint
 f:eb4b62e87c6977876651a410a2ab03e4:binutils/.signature
