@@ -1,0 +1,37 @@
+# Description: Berkeley DB
+# URL: https://www.oracle.com/technetwork/database/database-technologies/berkeleydb/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+
+name=db
+version=5.3.28
+release=3
+source=(https://download.oracle.com/berkeley-db/$name-$version.tar.gz
+	db-5.3.21-memp_stat-upstream-fix.patch
+	db-5.3.21-mutex_leak.patch
+	db-5.3.28-lemon_hash.patch
+	db-5.3.28-mmap-high-cpu-usage.patch
+	db-5.3.28_cve-2019-2708.patch
+	0001-atomic-Rename-local-__atomic_compare_exchange-to-avo.patch)
+
+build() {
+	cd $name-$version
+
+	patch -p1 -i $SRC/0001-atomic-Rename-local-__atomic_compare_exchange-to-avo.patch
+	patch -p1 -i $SRC/db-5.3.21-memp_stat-upstream-fix.patch
+	patch -p1 -i $SRC/db-5.3.21-mutex_leak.patch
+	patch -p1 -i $SRC/db-5.3.28-lemon_hash.patch
+	patch -p1 -i $SRC/db-5.3.28-mmap-high-cpu-usage.patch
+	patch -p1 -i $SRC/db-5.3.28_cve-2019-2708.patch
+
+	cd build_unix
+  CFLAGS="$CFLAGS -Wno-error=implicit-int" \
+	../dist/configure --prefix=/usr \
+		--enable-compat185 \
+		--enable-shared \
+		--enable-static \
+		--enable-cxx
+	make
+	make DESTDIR=$PKG install
+	rm -r $PKG/usr/docs
+	chmod -R +w $PKG
+}
