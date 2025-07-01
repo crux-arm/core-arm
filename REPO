@@ -1,5 +1,6 @@
 d:libgmp
 d:pkgutils
+d:db
 d:gcc
 d:kbd
 d:binutils
@@ -18,6 +19,15 @@ f:dec9708bb9797af5670bbfb4da6543d5:libgmp/.signature
 f:9693592850d40079557552217619265b:pkgutils/Pkgfile
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:a46418f596098b37cfda535d756a7b0c:pkgutils/.signature
+f:b886af5bc256d3a56d9be8f998f641b4:db/db-5.3.21-mutex_leak.patch
+f:cbbbdecab1948c6255c091398b8393ed:db/db-5.3.28-lemon_hash.patch
+f:d7e9ebf9a8ee019d6fec519201248ff7:db/Pkgfile
+f:bf37166683ba4966059cda949d4f6dbd:db/0001-atomic-Rename-local-__atomic_compare_exchange-to-avo.patch
+f:42de24f40ae2c7ea1b4c59352962029f:db/db-5.3.28_cve-2019-2708.patch
+f:034680aa69ee64596517784fe1161c1b:db/.footprint
+f:015f019e2731e18c4229ed5772707feb:db/db-5.3.28-mmap-high-cpu-usage.patch
+f:adc52ddfd7d35e9feaa4fcb96bcb5f94:db/.signature
+f:3aae61a6f51f287cd8873bc58fcde500:db/db-5.3.21-memp_stat-upstream-fix.patch
 f:331d1bc88a4622c0797c4cc1cf4c974f:gcc/Pkgfile
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
