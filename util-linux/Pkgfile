@@ -5,16 +5,11 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=util-linux
-version=2.41.1
+version=2.40.4
 release=1
-source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
-        meson.diff)
+source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
 
 build() {
-
-  # don't try to link pg and ul against libtinfo
-  patch -p0 -i $SRC/meson.diff -d $SRC/$name-$version
-
   meson setup $name-$version build \
     --prefix=/usr \
     --bindir=/usr/bin \
