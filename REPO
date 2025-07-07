@@ -1,5 +1,6 @@
 d:libgmp
 d:pkgutils
+d:pkgconf
 d:gcc
 d:kbd
 d:rhash
@@ -20,6 +21,11 @@ f:5ec27799afd019e5ef0fa83a71495ddb:pkgutils/pkgmk.conf
 f:9693592850d40079557552217619265b:pkgutils/Pkgfile
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:4be6b876c75ba6d8bebad03620e8f3b8:pkgutils/.signature
+f:9a62c5d91dcb968c163cb6495c687df3:pkgconf/arm-unknown-linux-gnueabihf.personality
+f:3f0171ccaa4ec14022e1a5b9c5bff250:pkgconf/Pkgfile
+f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
+f:861bce9c96900fc7f7b553b9116afcf0:pkgconf/.footprint
+f:0cca488f11d5c1ec5e85607b78a53c98:pkgconf/.signature
 f:d2dd922afe0f8a376292ded5eae1a7eb:gcc/Pkgfile
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
