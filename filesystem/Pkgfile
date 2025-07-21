@@ -64,7 +64,7 @@ build() {
   install -m 0644 securetty $PKG/etc
   install -m 0644 fstab $PKG/etc
   install -m 0644 mime.types $PKG/etc
-  ln -s /proc/self/mounts $PKG/etc/mtab
+  ln -s ../proc/self/mounts $PKG/etc/mtab
 
   # /usr/bin/crux
   cat > $PKG/usr/bin/crux << EOF
