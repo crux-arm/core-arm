@@ -68,9 +68,9 @@ f:3f0171ccaa4ec14022e1a5b9c5bff250:pkgconf/Pkgfile
 f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
 f:0cca488f11d5c1ec5e85607b78a53c98:pkgconf/.signature
 f:077fea960d8a490412eed744ce9bcc40:prt-get/.footprint
-f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
+f:fc31c3741c970567687b1de09e05a48a:prt-get/Pkgfile
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
-f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
+f:b04cea1bbc56074ba5a1a1c48e4df749:prt-get/.signature
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
 f:39d7e63bd15096509e1ba7e0ba0ee7fd:gcc/.footprint
