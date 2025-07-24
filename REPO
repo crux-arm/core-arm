@@ -66,9 +66,9 @@ f:015f019e2731e18c4229ed5772707feb:db/db-5.3.28-mmap-high-cpu-usage.patch
 f:cbbbdecab1948c6255c091398b8393ed:db/db-5.3.28-lemon_hash.patch
 f:b886af5bc256d3a56d9be8f998f641b4:db/db-5.3.21-mutex_leak.patch
 f:077fea960d8a490412eed744ce9bcc40:prt-get/.footprint
-f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
+f:fc31c3741c970567687b1de09e05a48a:prt-get/Pkgfile
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
-f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
+f:b04cea1bbc56074ba5a1a1c48e4df749:prt-get/.signature
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
 f:b4be86099efa3d27de19c66f6df79262:gcc/.footprint
