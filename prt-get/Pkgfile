@@ -13,6 +13,7 @@ source=(http://crux.nu/files/prt-get-$version.tar.xz
 build() {
   cd ${name}-${version}
 
+  CXXFLAGS="$CXXFLAGS -D_FILE_OFFSET_BITS=64" \
   ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
