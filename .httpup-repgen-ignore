@@ -1,7 +1,0 @@
-README.md
-\.git*
-^core\-arm\.httpup
-*~
-\.*~
-*work
-.\pkg\.
