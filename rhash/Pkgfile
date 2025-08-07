@@ -18,12 +18,12 @@ build() {
     --extra-cflags="$CFLAGS" \
     --extra-ldflags="$LDFLAGS"
   
-  make
-# Avoid tests under docker
+  make -j1
+#  Avoid tests under docker
 #  make test test-lib
   
-  make DESTDIR=$PKG install
-  make -C librhash DESTDIR=$PKG install-lib-headers install-so-link
+  make DESTDIR=$PKG -j1 install
+  make -C librhash DESTDIR=$PKG -j1 install-lib-headers install-so-link
   
   install -Dm0644 -o root -g root dist/librhash.pc \
     $PKG/usr/lib/pkgconfig/librhash.pc
