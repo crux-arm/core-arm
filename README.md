@@ -1,10 +1,10 @@
-# crux-ports-core-arm
+# core-arm
 
 CRUX-ARM ports overlay for CRUX core collection
 
-To use these ports, download the `core-arm.httpup` file to `/etc/ports`:
+To use these ports, download the `core-arm.rsync` file to `/etc/ports`:
 ```
-$ sudo wget -P /etc/ports https://raw.githubusercontent.com/crux-arm/crux-ports-core-arm/3.6/core-arm.httpup
+$ sudo wget -P /etc/ports https://git.crux.nu/crux-arm/core-arm/raw/branch/3.8/core-arm.rsync
 $ sudo ports -u core-arm
 ```
 
