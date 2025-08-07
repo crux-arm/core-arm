@@ -14,10 +14,9 @@ d:ninja
 d:pkgutils
 d:util-linux
 d:wireless-tools
-f:48002ab4cc77f01f4bdad6bf4a8f370e:rhash/.md5sum
 f:4a0af4c1fecebb0d3cf2c7a1345f76ed:rhash/.footprint
-f:6267683dd026e1b85ed415e2960330c1:rhash/Pkgfile
-f:ea239d1c4d20d7d246866e376d0f366e:rhash/.signature
+f:6c0aa640c994806106af1962f6f3e297:rhash/Pkgfile
+f:ea09b85ce7944682771424de3febf221:rhash/.signature
 f:bf31761c07edad79a6b689e8ec552147:python3/.footprint
 f:3fec8b5125ed4bbbe1cbdcb229ef8e6c:python3/Pkgfile
 f:56108260aa42c998a5acf4d967c964c1:python3/.signature
