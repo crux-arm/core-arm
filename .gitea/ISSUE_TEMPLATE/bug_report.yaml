@@ -1,0 +1,71 @@
+---
+name: Bug Report
+about: File a bug report
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking your time to open a ticket!
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: Please explain your issue
+      placeholder: Describe your issue
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Steps to reproduce the issue
+      description: If applicable, please explain the steps to reproduce the issue
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: false
+  - type: textarea
+    id: received_results
+    attributes:
+      label: Describe the results you received
+      description: Please explain the results you are noticing
+      placeholder: Describe the results you received
+    validations:
+      required: true
+  - type: textarea
+    id: expected_results
+    attributes:
+      label: Describe the results you expected
+      description: Please explain the results you are expecting
+      placeholder: Describe the results you expected
+    validations:
+      required: true
+  - type: dropdown
+    id: virtualized-notvirtualized
+    attributes:
+      label: Virtualization
+      description: Is this running virtualized?
+      options: [Yes, No]
+  - type: input
+    id: virtualization-platform
+    attributes:
+      label: Specify virtualization platform (if "Yes")
+      placeholder: What virtualization platform are you using?
+  - type: dropdown
+    id: type
+    attributes:
+      label: Hardware
+      description: Please tell us what hardware you are using
+      options:
+        - PineA64
+        - Raspberry Pi 3
+        - Raspberry Pi 4
+        - Raspberry Pi 5
+        - Other
+  - type: input
+    id: hardware_other
+    attributes:
+      label: Specify hardware (if "Other")
+      placeholder: Model/board name
