@@ -1,5 +1,5 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dZJ1ymV2dNRzZ3nxt2zHx5R9h88Kc3J4ZT/+/kHPnABivRL76u+Sqip/VSid7IZi9y/xW6zqvJpxSeMQ47MbqwI=
-SHA256 (Pkgfile) = f8d8c20879b566b8978f2ccb2e660899c11868f150b30d95b6569190dedc1609
-SHA256 (.footprint) = 3c89745a18c62bfc515b3dd44a95c5cdb1b953b6e52b325668a39b85cdad841c
-SHA256 (kbd-2.8.0.tar.xz) = 01f5806da7d1d34f594b7b2a6ae1ab23215344cf1064e8edcd3a90fef9776a11
+RWTMGLGEHsm4devuf5bGbh6Gi+29D40O5P0L8Y15mmXMEcoawnV+Y/L566OPb09x5qF6/mu5DgdI9RyMG/Seknfssari1+ZVhAM=
+SHA256 (Pkgfile) = e8fac125317116c0f421de9cd904e73e9739ef82dc2af4905d9bd1f4355c8ba1
+SHA256 (.footprint) = e6e465955ca24cb71eb406e79c8275be7a0dd2f20f29696c26cb3c8fae0e3ab1
+SHA256 (kbd-2.9.0.tar.xz) = fb3197f17a99eb44d22a3a1a71f755f9622dd963e66acfdea1a45120951b02ed
