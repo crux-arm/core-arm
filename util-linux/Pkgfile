@@ -6,12 +6,14 @@
 
 name=util-linux
 version=2.41.2
-release=1
-source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
+release=2
+source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
+        bits)
 
 build() {
 
   sed -r '/^  dependencies/s/lib_tinfo,//' -i $name-$version/meson.build
+  cp $SRC/bits $name-$version/bash-completion  
 
   meson setup $name-$version build \
     --prefix=/usr \
