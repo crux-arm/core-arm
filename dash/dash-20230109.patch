@@ -1,0 +1,730 @@
+diff --git a/configure.ac b/configure.ac
+index 52aa429..5524650 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -177,6 +177,17 @@ if test "$have_st_mtim" = "yes"; then
+ 		[Define if your `struct stat' has `st_mtim'])
+ fi
+ 
++dnl F_DUPFD_CLOEXEC is a mandatory part of POSIX since Issue 7
++AC_MSG_CHECKING(for F_DUPFD_CLOEXEC)
++AC_COMPILE_IFELSE(
++[AC_LANG_PROGRAM([#include <unistd.h>
++#include <fcntl.h>],
++[return fcntl(0, F_DUPFD_CLOEXEC, 0)])],
++have_dupfd_cloexec=1, have_dupfd_cloexec=0)
++AC_MSG_RESULT($(expr yes \& $have_dupfd_cloexec \| no))
++AC_DEFINE_UNQUOTED([HAVE_F_DUPFD_CLOEXEC], [$have_dupfd_cloexec],
++	[Define to 1 your system supports F_DUPFD_CLOEXEC])
++
+ AC_ARG_WITH(libedit, AS_HELP_STRING(--with-libedit, [Compile with libedit support]))
+ use_libedit=
+ if test "$with_libedit" = "yes"; then
+diff --git a/src/alias.c b/src/alias.c
+index daeacbb..fcad43b 100644
+--- a/src/alias.c
++++ b/src/alias.c
+@@ -197,7 +197,8 @@ freealias(struct alias *ap) {
+ 
+ void
+ printalias(const struct alias *ap) {
+-	out1fmt("%s=%s\n", ap->name, single_quote(ap->val));
++	out1str(single_quote(ap->name));
++	out1fmt("=%s\n", single_quote(ap->val));
+ }
+ 
+ STATIC struct alias **
+diff --git a/src/dash.1 b/src/dash.1
+index ff02237..d3893bc 100644
+--- a/src/dash.1
++++ b/src/dash.1
+@@ -1095,6 +1095,8 @@ etc).
+ .It :
+ .It true
+ A null command that returns a 0 (true) exit value.
++.It false
++A null command that returns a 1 (false) exit value.
+ .It \&. file
+ The commands in the specified file are read and executed by the shell.
+ .It alias Op Ar name Ns Op Ar "=string ..."
+@@ -1143,8 +1145,8 @@ Do not execute the command but
+ search for the command and print the absolute pathname
+ of utilities, the name for builtins or the expansion of aliases.
+ .El
+-.It cd Ar -
+-.It Xo cd Op Fl LP
++.It cd|chdir Ar -
++.It Xo cd|chdir Op Fl LP
+ .Op Ar directory
+ .Xc
+ Switch to the specified directory (default
+@@ -1342,13 +1344,12 @@ The number of previous commands that are accessible.
+ .El
+ .It fg Op Ar job
+ Move the specified job or the current job to the foreground.
+-.It getopts Ar optstring var
++.It getopts Ar optstring var Op Ar arg ...
+ The
+ .Tn POSIX
+ .Ic getopts
+ command, not to be confused with the
+-.Em Bell Labs
+--derived
++.Em Bell Labs Ns -derived
+ .Xr getopt 1 .
+ .Pp
+ The first argument should be a series of letters, each of which may be
+@@ -1386,6 +1387,12 @@ then
+ .Ev OPTARG
+ will be unset.
+ .Pp
++By default, the variables
++.Va $1 , ... , $n
++are inspected; if
++.Ar arg Ns s
++are specified, they'll be parsed instead.
++.Pp
+ .Va optstring
+ is a string of recognized option letters (see
+ .Xr getopt 3 ) .
+@@ -1430,7 +1437,7 @@ do
+ 	\\?)	echo $USAGE; exit 1;;
+ 	esac
+ done
+-shift `expr $OPTIND - 1`
++shift $((OPTIND - 1))
+ .Ed
+ .Pp
+ This code will accept any of the following as equivalent:
+@@ -1441,7 +1448,8 @@ cmd \-a \-c arg file file
+ cmd \-carg -a file file
+ cmd \-a \-carg \-\- file file
+ .Ed
+-.It hash Fl rv Ar command ...
++.It hash Op Ar command ...
++.It hash Fl r
+ The shell maintains a hash table which remembers the
+ locations of commands.
+ With no arguments whatsoever,
+@@ -1457,13 +1465,51 @@ With arguments, the
+ .Ic hash
+ command removes the specified commands from the hash table (unless
+ they are functions) and then locates them.
+-With the
+-.Fl v
+-option, hash prints the locations of the commands as it finds them.
+ The
+ .Fl r
+ option causes the hash command to delete all the entries in the hash table
+ except for functions.
++.It jobs Oo Fl lp Oc Op Ar job ...
++Display the status of all, or just the specified,
++.Ar job Ns s :
++.Bl -tag -compact -offset 5n -width "By default"
++.It By default
++display the job number, currency
++.Pq Sy +-
++status, if any, the job state, and its shell command.
++.It Fl l
++also output the PID of the group leader, and just the PID and shell commands
++of other members of the job.
++.It Fl p
++Display only leader PIDs, one per line.
++.El
++.It kill Oo Fl s Ar sigspec | Fl Ns Ar signum | Fl Ns Ar sigspec Oc Op Ar pid | job ...
++Equivalent to
++.Xr kill 1 ,
++but a
++.Ar job
++spec may also be specified.
++Signals can be either case-insensitive names without
++.Dv SIG
++prefixes or decimal numbers; the default is
++.Dv TERM .
++.It kill Fl l Op Ar signum | exitstatus
++List available signal names without the
++.Dv SIG
++prefix
++.Pq Ar sigspec Ns s .
++If
++.Ar signum
++specified, display just the
++.Ar sigspec
++for that signal.
++If
++.Ar exitstatus
++specified
++.Pq > Sy 128 ,
++display just the
++.Ar sigspec
++that caused it.
+ .It pwd Op Fl LP
+ builtin command remembers what the current directory
+ is rather than recomputing it each time.
+@@ -1528,41 +1574,36 @@ With the
+ option specified the output will be formatted suitably for non-interactive use.
+ .\".Pp
+ .It Xo printf Ar format
+-.Op Ar arguments  ...
++.Oo Ar value Oc Ns ...
+ .Xc
+ .Ic printf
+-formats and prints its arguments, after the first, under control
+-of the
+-.Ar format  .
+-The
+-.Ar format
+-is a character string which contains three types of objects: plain characters,
++formats and prints its arguments according to
++.Ar format ,
++a character string which contains three types of objects: plain characters,
+ which are simply copied to standard output, character escape sequences which
+ are converted and copied to the standard output, and format specifications,
+ each of which causes printing of the next successive
+-.Ar argument  .
++.Ar value .
+ .Pp
+-The
+-.Ar arguments
+-after the first are treated as strings if the corresponding format is
++Each
++.Ar value
++is treated as a string if the corresponding format specification is
+ either
+ .Cm b ,
+-.Cm c
++.Cm c ,
+ or
+ .Cm s ;
+-otherwise it is evaluated as a C constant, with the following extensions:
+-.Pp
++otherwise it is evaluated as a C constant, with the following additions:
+ .Bl -bullet -offset indent -compact
+ .It
+ A leading plus or minus sign is allowed.
+ .It
+-If the leading character is a single or double quote, the value is the
+-.Tn ASCII
+-code of the next character.
++If the leading character is a single or double quote, the value of the next byte.
+ .El
+ .Pp
+-The format string is reused as often as necessary to satisfy the
+-.Ar arguments  .
++The format string is reused as often as necessary until all
++.Ar value Ns s
++are consumed.
+ Any extra format specifications are evaluated with zero or the null
+ string.
+ .Pp
+@@ -2121,7 +2162,7 @@ printed; for commands and tracked aliases the complete pathname of the
+ command is printed.
+ .It ulimit Xo
+ .Op Fl H \*(Ba Fl S
+-.Op Fl a \*(Ba Fl tfdscmlpnv Op Ar value
++.Op Fl a \*(Ba Fl tfdscmlpnvwr Op Ar value
+ .Xc
+ Inquire about or set the hard or soft limits on processes or set new
+ limits.
+@@ -2174,6 +2215,8 @@ show or set the limit on the number files a process can have open at once
+ .It Fl v
+ show or set the limit on the total virtual memory that can be
+ in use by a process (in kilobytes)
++.It Fl w
++show or set the limit on the total number of locks held by a process
+ .It Fl r
+ show or set the limit on the real-time scheduling priority of a process
+ .El
+diff --git a/src/exec.c b/src/exec.c
+index 87354d4..83cba94 100644
+--- a/src/exec.c
++++ b/src/exec.c
+@@ -36,6 +36,7 @@
+ #include <sys/stat.h>
+ #include <unistd.h>
+ #include <fcntl.h>
++#include <stdbool.h>
+ #include <stdlib.h>
+ #ifdef HAVE_PATHS_H
+ #include <paths.h>
+@@ -271,11 +272,16 @@ hashcmd(int argc, char **argv)
+ 	int c;
+ 	struct cmdentry entry;
+ 	char *name;
++	bool clear;
+ 
+-	while ((c = nextopt("r")) != '\0') {
++	clear = false;
++	while ((c = nextopt("r")) != '\0')
++		clear = true;
++	if(clear) {
+ 		clearcmdentry();
+ 		return 0;
+ 	}
++
+ 	if (*argptr == NULL) {
+ 		for (pp = cmdtable ; pp < &cmdtable[CMDTABLESIZE] ; pp++) {
+ 			for (cmdp = *pp ; cmdp ; cmdp = cmdp->next) {
+@@ -760,11 +766,11 @@ unsetfunc(const char *name)
+ int
+ typecmd(int argc, char **argv)
+ {
+-	int i;
+ 	int err = 0;
+ 
+-	for (i = 1; i < argc; i++) {
+-		err |= describe_command(out1, argv[i], NULL, 1);
++	nextopt(nullstr);
++	while (*argptr) {
++		err |= describe_command(out1, *argptr++, NULL, 1);
+ 	}
+ 	return err;
+ }
+diff --git a/src/input.c b/src/input.c
+index ec075f5..38969a7 100644
+--- a/src/input.c
++++ b/src/input.c
+@@ -54,9 +54,7 @@
+ #include "alias.h"
+ #include "parser.h"
+ #include "main.h"
+-#ifndef SMALL
+ #include "myhistedit.h"
+-#endif
+ 
+ #define IBUFSIZ (BUFSIZ + 1)
+ 
+@@ -77,6 +75,7 @@ INCLUDE <stdio.h>
+ INCLUDE <unistd.h>
+ INCLUDE "input.h"
+ INCLUDE "error.h"
++INCLUDE "syntax.h"
+ 
+ INIT {
+ 	basepf.nextc = basepf.buf = basebuf;
+@@ -85,9 +84,12 @@ INIT {
+ 
+ RESET {
+ 	/* clear input buffer */
+-	basepf.lleft = basepf.nleft = 0;
+-	basepf.unget = 0;
+ 	popallfiles();
++	basepf.unget = 0;
++	while (basepf.lastc[0] != '\n' &&
++	       basepf.lastc[0] != PEOF &&
++	       !int_pending())
++		pgetc();
+ }
+ 
+ FORKRESET {
+@@ -159,6 +161,17 @@ int pgetc(void)
+ 	return __pgetc();
+ }
+ 
++static int stdin_clear_nonblock(void)
++{
++	int flags = fcntl(0, F_GETFL, 0);
++
++	if (flags >= 0) {
++		flags &=~ O_NONBLOCK;
++		flags = fcntl(0, F_SETFL, flags);
++	}
++
++	return flags;
++}
+ 
+ static int
+ preadfd(void)
+@@ -195,22 +208,38 @@ retry:
+ 
+ 	} else
+ #endif
++	if (parsefile->fd)
+ 		nr = read(parsefile->fd, buf, IBUFSIZ - 1);
++	else {
++		unsigned len = IBUFSIZ - 1;
++
++		nr = 0;
+ 
++		do {
++			int err;
++
++			err = read(0, buf, 1);
++			if (err <= 0) {
++				if (nr)
++					break;
++
++				nr = err;
++				if (errno != EWOULDBLOCK)
++					break;
++				if (stdin_clear_nonblock() < 0)
++					break;
++
++				out2str("sh: turning off NDELAY mode\n");
++				goto retry;
++			}
++
++			nr++;
++		} while (!IS_DEFINED_SMALL && *buf++ != '\n' && --len);
++	}
+ 
+ 	if (nr < 0) {
+ 		if (errno == EINTR)
+ 			goto retry;
+-		if (parsefile->fd == 0 && errno == EWOULDBLOCK) {
+-			int flags = fcntl(0, F_GETFL, 0);
+-			if (flags >= 0 && flags & O_NONBLOCK) {
+-				flags &=~ O_NONBLOCK;
+-				if (fcntl(0, F_SETFL, flags) >= 0) {
+-					out2str("sh: turning off NDELAY mode\n");
+-					goto retry;
+-				}
+-			}
+-		}
+ 	}
+ 	return nr;
+ }
+@@ -226,12 +255,11 @@ retry:
+ 
+ static int preadbuffer(void)
+ {
+-	char *q;
+-	int more;
+-#ifndef SMALL
++	int first = whichprompt == 1;
+ 	int something;
+-#endif
+ 	char savec;
++	int more;
++	char *q;
+ 
+ 	if (unlikely(parsefile->strpush)) {
+ 		popstring();
+@@ -241,11 +269,11 @@ static int preadbuffer(void)
+ 		return PEOF;
+ 	flushall();
+ 
+-	more = parsefile->lleft;
++	more = input_get_lleft(parsefile);
+ 	if (more <= 0) {
+ again:
+ 		if ((more = preadfd()) <= 0) {
+-			parsefile->lleft = parsefile->nleft = 0;
++			input_set_lleft(parsefile, parsefile->nleft = 0);
+ 			return PEOF;
+ 		}
+ 	}
+@@ -253,37 +281,38 @@ again:
+ 	q = parsefile->nextc;
+ 
+ 	/* delete nul characters */
+-#ifndef SMALL
+-	something = 0;
+-#endif
++	something = !first;
+ 	for (;;) {
+ 		int c;
+ 
+ 		more--;
+ 		c = *q;
+ 
+-		if (!c)
++		if (!c) {
+ 			memmove(q, q + 1, more);
+-		else {
+-			q++;
++			goto check;
++		}
+ 
+-			if (c == '\n') {
+-				parsefile->nleft = q - parsefile->nextc - 1;
+-				break;
+-			}
++		q++;
+ 
+-#ifndef SMALL
+-			switch (c) {
+-			default:
+-				something = 1;
+-				/* fall through */
+-			case '\t':
+-			case ' ':
+-				break;
+-			}
+-#endif
++		if (IS_DEFINED_SMALL)
++			goto check;
++
++		switch (c) {
++		case '\n':
++			parsefile->nleft = q - parsefile->nextc - 1;
++			goto check;
++
++		default:
++			something = 1;
++			/* fall through */
++
++		case '\t':
++		case ' ':
++			break;
+ 		}
+ 
++check:
+ 		if (more <= 0) {
+ 			parsefile->nleft = q - parsefile->nextc - 1;
+ 			if (parsefile->nleft < 0)
+@@ -291,20 +320,19 @@ again:
+ 			break;
+ 		}
+ 	}
+-	parsefile->lleft = more;
++	input_set_lleft(parsefile, more);
+ 
+-	savec = *q;
++	if (!IS_DEFINED_SMALL)
++		savec = *q;
+ 	*q = '\0';
+ 
+-#ifndef SMALL
+ 	if (parsefile->fd == 0 && hist && something) {
+ 		HistEvent he;
+ 		INTOFF;
+-		history(hist, &he, whichprompt == 1? H_ENTER : H_APPEND,
++		history(hist, &he, first ? H_ENTER : H_APPEND,
+ 			parsefile->nextc);
+ 		INTON;
+ 	}
+-#endif
+ 
+ 	if (vflag) {
+ 		out2str(parsefile->nextc);
+@@ -313,7 +341,8 @@ again:
+ #endif
+ 	}
+ 
+-	*q = savec;
++	if (!IS_DEFINED_SMALL)
++		*q = savec;
+ 
+ 	return (signed char)*parsefile->nextc++;
+ }
+@@ -428,7 +457,7 @@ setinputfd(int fd, int push)
+ 	parsefile->fd = fd;
+ 	if (parsefile->buf == NULL)
+ 		parsefile->buf = ckmalloc(IBUFSIZ);
+-	parsefile->lleft = parsefile->nleft = 0;
++	input_set_lleft(parsefile, parsefile->nleft = 0);
+ 	plinno = 1;
+ }
+ 
+diff --git a/src/input.h b/src/input.h
+index 8c39f33..1ff5773 100644
+--- a/src/input.h
++++ b/src/input.h
+@@ -34,6 +34,12 @@
+  *	@(#)input.h	8.2 (Berkeley) 5/4/95
+  */
+ 
++#ifdef SMALL
++#define IS_DEFINED_SMALL 1
++#else
++#define IS_DEFINED_SMALL 0
++#endif
++
+ /* PEOF (the end of file marker) is defined in syntax.h */
+ 
+ enum {
+@@ -70,7 +76,9 @@ struct parsefile {
+ 	int linno;		/* current line */
+ 	int fd;			/* file descriptor (or -1 if string) */
+ 	int nleft;		/* number of chars left in this line */
++#ifndef SMALL
+ 	int lleft;		/* number of chars left in this buffer */
++#endif
+ 	char *nextc;		/* next char in buffer */
+ 	char *buf;		/* input buffer */
+ 	struct strpush *strpush; /* for pushing strings at this level */
+@@ -104,3 +112,19 @@ void setinputstring(char *);
+ void popfile(void);
+ void unwindfiles(struct parsefile *);
+ void popallfiles(void);
++
++static inline int input_get_lleft(struct parsefile *pf)
++{
++#ifdef SMALL
++	return 0;
++#else
++	return pf->lleft;
++#endif
++}
++
++static inline void input_set_lleft(struct parsefile *pf, int len)
++{
++#ifndef SMALL
++	pf->lleft = len;
++#endif
++}
+diff --git a/src/miscbltin.c b/src/miscbltin.c
+index 5ccbbcb..e553f9e 100644
+--- a/src/miscbltin.c
++++ b/src/miscbltin.c
+@@ -440,6 +440,9 @@ ulimitcmd(int argc, char **argv)
+ #endif
+ #ifdef RLIMIT_LOCKS
+ 			       "w"
++#endif
++#ifdef RLIMIT_RTPRIO
++			       "r"
+ #endif
+ 	)) != '\0')
+ 		switch (optc) {
+diff --git a/src/myhistedit.h b/src/myhistedit.h
+index 22e5c43..1736f62 100644
+--- a/src/myhistedit.h
++++ b/src/myhistedit.h
+@@ -31,9 +31,27 @@
+  *	@(#)myhistedit.h	8.2 (Berkeley) 5/4/95
+  */
+ 
++#ifdef SMALL
++typedef void History;
++typedef void EditLine;
++typedef int HistEvent;
++
++enum {
++	H_APPEND,
++	H_ENTER,
++};
++
++#define hist NULL
++
++static inline void history(History *h, HistEvent *he, int action, char *p)
++{
++}
++#else
+ #include <histedit.h>
+ 
+ extern History *hist;
++#endif
++
+ extern EditLine *el;
+ extern int displayhist;
+ 
+diff --git a/src/options.c b/src/options.c
+index a46c23b..2d4bd3b 100644
+--- a/src/options.c
++++ b/src/options.c
+@@ -409,8 +409,11 @@ getoptscmd(int argc, char **argv)
+ {
+ 	char **optbase;
+ 
++	nextopt(nullstr);
++	argc -= argptr - argv - 1;
++	argv = argptr - 1;
+ 	if (argc < 3)
+-		sh_error("Usage: getopts optstring var [arg]");
++		sh_error("Usage: getopts optstring var [arg...]");
+ 	else if (argc == 3) {
+ 		optbase = shellparam.p;
+ 		if ((unsigned)shellparam.optind > shellparam.nparam + 1) {
+diff --git a/src/parser.c b/src/parser.c
+index a552c47..299c260 100644
+--- a/src/parser.c
++++ b/src/parser.c
+@@ -615,7 +615,7 @@ void fixredir(union node *n, const char *text, int err)
+ 	else {
+ 
+ 		if (err)
+-			synerror("Bad fd number");
++			sh_error("Bad fd number: %s", text);
+ 		else
+ 			n->ndup.vname = makename();
+ 	}
+@@ -1360,12 +1360,10 @@ parsebackq: {
+ 	struct heredoc *saveheredoclist;
+ 	int uninitialized_var(saveprompt);
+ 
+-	str = NULL;
++	USTPUTC(CTLBACKQ, out);
++	str = stackblock();
+ 	savelen = out - (char *)stackblock();
+-	if (savelen > 0) {
+-		str = alloca(savelen);
+-		memcpy(str, stackblock(), savelen);
+-	}
++	grabstackblock(savelen);
+         if (oldstyle) {
+                 /* We must read until the closing backquote, giving special
+                    treatment to some slashes, and then push the string and
+@@ -1445,12 +1443,7 @@ done:
+ 	/* Ignore any pushed back tokens left from the backquote parsing. */
+ 	if (oldstyle)
+ 		tokpushback = 0;
+-	out = growstackto(savelen + 1);
+-	if (str) {
+-		memcpy(out, str, savelen);
+-		STADJUST(savelen, out);
+-	}
+-	USTPUTC(CTLBACKQ, out);
++	out = stnputs(str, savelen, stackblock());
+ 	if (oldstyle)
+ 		goto parsebackq_oldreturn;
+ 	else
+diff --git a/src/redir.c b/src/redir.c
+index 5a5835c..631ddc9 100644
+--- a/src/redir.c
++++ b/src/redir.c
+@@ -446,13 +446,18 @@ savefd(int from, int ofd)
+ 	int newfd;
+ 	int err;
+ 
++#if HAVE_F_DUPFD_CLOEXEC
++	newfd = fcntl(from, F_DUPFD_CLOEXEC, 10);
++#else
+ 	newfd = fcntl(from, F_DUPFD, 10);
++#endif
++
+ 	err = newfd < 0 ? errno : 0;
+ 	if (err != EBADF) {
+ 		close(ofd);
+ 		if (err)
+ 			sh_error("%d: %s", from, strerror(err));
+-		else
++		else if(!HAVE_F_DUPFD_CLOEXEC)
+ 			fcntl(newfd, F_SETFD, FD_CLOEXEC);
+ 	}
+ 
+diff --git a/src/var.c b/src/var.c
+index ef9c2bd..b70d72c 100644
+--- a/src/var.c
++++ b/src/var.c
+@@ -154,6 +154,10 @@ RESET {
+ }
+ #endif
+ 
++static char *varnull(const char *s)
++{
++	return (strchr(s, '=') ?: nullstr - 1) + 1;
++}
+ 
+ /*
+  * This routine initializes the builtin variables.  It is called when the
+@@ -266,7 +270,7 @@ struct var *setvareq(char *s, int flags)
+ 			goto out;
+ 
+ 		if (vp->func && (flags & VNOFUNC) == 0)
+-			(*vp->func)(strchrnul(s, '=') + 1);
++			(*vp->func)(varnull(s));
+ 
+ 		if ((vp->flags & (VTEXTFIXED|VSTACK)) == 0)
+ 			ckfree(vp->text);
+@@ -531,7 +535,7 @@ poplocalvars(void)
+ 			unsetvar(vp->text);
+ 		} else {
+ 			if (vp->func)
+-				(*vp->func)(strchrnul(lvp->text, '=') + 1);
++				(*vp->func)(varnull(lvp->text));
+ 			if ((vp->flags & (VTEXTFIXED|VSTACK)) == 0)
+ 				ckfree(vp->text);
+ 			vp->flags = lvp->flags;
+
