@@ -4,7 +4,7 @@ name: Check versions
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 1 * * *"
+    - cron: "0 1 * * *"
 
 jobs:
   check-and-inform:
