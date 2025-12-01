@@ -7,7 +7,7 @@
 name=libgmp
 version=5.1.3
 release=1
-source=(ftp://ftp.gmplib.org/pub/gmp-$version/gmp-$version.tar.xz)
+source=(http://ftp.gnu.org/gnu/gmp/gmp-5.1.3.tar.xz)
 
 build() {
   cd gmp-$version
