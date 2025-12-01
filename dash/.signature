@@ -1,0 +1,6 @@
+untrusted comment: verify with /etc/ports/core-arm.pub
+RWTMGLGEHsm4dZa7uTvTL3KpaCtgVRFoBdi0HU1UW6uIx4t1wlQeTfTpsVT6kgkGF9LMEx3rjJjrtTzJ/vRbv3bxLc12fC+5qgE=
+SHA256 (Pkgfile) = 026e02a1564e3bb8d29ba6d5a9f421b387c3551e3a922128c381ea77f8473f96
+SHA256 (.footprint) = 3a7bbfc94c40691a4871ab86fb334dfcbc7f98f74ed06847f091ba0b1721d540
+SHA256 (dash-0.5.12.tar.gz) = 6a474ac46e8b0b32916c4c60df694c82058d3297d8b385b74508030ca4a8f28a
+SHA256 (dash-20230109.patch) = 8a0c2b670b18cb0a4b7f5816e89e11dcebf8e5638cd4d8041e839f83bb39872c
