@@ -7,7 +7,7 @@
 name=util-linux
 version=2.27.1
 release=1
-source=(http://ftp.kernel.org/pub/linux/utils/$name/v2.27/$name-$version.tar.xz)
+source=(http://ftp.iij.ad.jp/pub/linux/kernel/linux/utils/util-linux/v2.27/util-linux-2.27.1.tar.xz)
 
 build() {
   cd $name-$version

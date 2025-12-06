@@ -8,7 +8,7 @@ name=glibc
 version=2.19
 release=5
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
-        ftp://ftp.kernel.org/pub/linux/kernel/v3.0/linux-3.12.tar.xz \
+        http://ftp.uni-bayreuth.de/linux/kernel/v3.x/linux-3.12.tar.xz \
         CVE-2014-0475.patch iconv-gconv_trans.c.patch \
         CVE-2012-3406-Stack-overflow-in-vfprintf-BZ-16617.patch \
         CVE-2014-7817-wordexp-fails-to-honour-WRDE_NOCMD.patch \

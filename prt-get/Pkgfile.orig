@@ -5,19 +5,20 @@
 # Depends on:
 
 name=prt-get
-version=5.19
-release=2
-source=(http://crux.nu/files/prt-get-$version.tar.gz
+version=5.19.6
+release=1
+source=(http://crux.nu/files/prt-get-$version.tar.xz
         prt-get.conf prt-get.aliases)
 
 build() {
   cd ${name}-${version}
 
-  ./configure --prefix=/usr \
-              --mandir=/usr/man
+  CXXFLAGS="$CXXFLAGS -D_FILE_OFFSET_BITS=64" \
+  ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
 
-  install -m 644 $SRC/prt-get.conf $PKG/etc/
-  install -D -m 644 $SRC/prt-get.aliases $PKG/var/lib/pkg/prt-get.aliases
+  install -m 644 $SRC/prt-get.{conf,aliases} $PKG/etc/
+  install -d $PKG/var/lib/pkg
+  touch $PKG/var/lib/pkg/prt-get.locker
 }
