@@ -7,7 +7,7 @@
 name=libgmp
 version=6.0.0a
 release=1
-source=(http://gmplib.org/download/gmp/gmp-$version.tar.xz)
+source=(http://ftp.uni-bayreuth.de/GNU/gmp/gmp-6.0.0a.tar.xz)
 
 build() {
   cd gmp-${version%a}
