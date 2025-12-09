@@ -7,7 +7,7 @@
 name=kbd
 version=2.0.4
 release=1
-source=(http://ftp.kernel.org/pub/linux/utils/$name/$name-$version.tar.xz)
+source=(http://ftp.iij.ad.jp/pub/linux/kernel/linux/utils/kbd/kbd-2.0.4.tar.xz)
 
 build() {
   cd $name-$version

@@ -7,7 +7,7 @@
 name=zlib
 version=1.2.12
 release=1
-source=(https://www.zlib.net/$name-$version.tar.xz)
+source=(http://src.rrz.uni-hamburg.de/object/5fc414a9726be31427b440b434d05f78-1490071-1648424340/zlib-1.2.12.tar.gz)
 
 build() {
   cd $name-$version
