@@ -3,6 +3,6 @@
 #
 
 ROOT_DIR=/usr/ports/efikamx-arm
-URL=https://raw.githubusercontent.com/crux-arm/crux-ports-efikamx-arm/3.1/
+URL=https://raw.githubusercontent.com/crux-arm/crux-ports-efikamx-arm/3.2/
 
 # End of file
