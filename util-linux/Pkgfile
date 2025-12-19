@@ -5,8 +5,8 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=util-linux
-version=2.41.2
-release=2
+version=2.41.3
+release=1
 source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
         bits)
 
