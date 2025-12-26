@@ -18,6 +18,8 @@ build() {
 
   ../$name-$version/configure --prefix=/usr \
                               --build=arm-unknown-linux-gnueabihf \
+                              --with-arch=armv7-a \ 
+                              --with-fpu=vfpv3-d16 \
                               --with-abi=aapcs-linux --with-mode=arm \
                               --with-float=hard \
                               --libexecdir=/usr/lib \
