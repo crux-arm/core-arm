@@ -20,7 +20,7 @@ build() {
                               --host=arm-unknown-linux-gnueabihf \
                               --target=arm-unknown-linux-gnueabihf \
                               --build=arm-unknown-linux-gnueabihf \
-                              --with-arch=armv7-a \ 
+                              --with-arch=armv7-a \
                               --with-fpu=vfpv3-d16 \
                               --with-abi=aapcs-linux --with-mode=arm \
                               --with-float=hard \
