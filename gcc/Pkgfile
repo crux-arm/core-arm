@@ -17,7 +17,10 @@ build() {
   cd build
 
   ../$name-$version/configure --prefix=/usr \
+                              --host=arm-unknown-linux-gnueabihf \
+                              --target=arm-unknown-linux-gnueabihf \
                               --build=arm-unknown-linux-gnueabihf \
+                              --with-arch=armv7-a \
                               --with-abi=aapcs-linux --with-mode=arm \
                               --with-float=hard \
                               --libexecdir=/usr/lib \
