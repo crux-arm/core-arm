@@ -6,10 +6,10 @@
 
 name=glibc
 version=2.32
-release=2
+release=7
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.19.24.tar.xz \
-        $name-$version-2.patch \
+        $name-$version-7.patch \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
@@ -20,7 +20,7 @@ build() {
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
-  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-2.patch
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-7.patch
 
   mkdir $SRC/build
   cd $SRC/build
