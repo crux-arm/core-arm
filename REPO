@@ -1,7 +1,6 @@
 d:kbd
 d:gcc
 d:readline
-d:openrdate
 d:linux-pam
 d:ports
 d:libgmp
@@ -25,12 +24,6 @@ f:ee4f17d3eb968d9fe8825acba048978a:readline/.signature
 f:553cf04fdeec54dca12062864c3ffba3:readline/inputrc
 f:c54f220fbf4e90dc823358e980618b2a:readline/Pkgfile
 f:4a69248ddecf4bd836cf809a190c376f:readline/.footprint
-f:11b8ff9d9904f3a6020334f86bbe2e5c:openrdate/.signature
-f:c212d60bdabec86c27d82b1a19223aa0:openrdate/rdate
-f:60a7edda94008164a9aa0c36d0da79fe:openrdate/Pkgfile
-f:7bc21568b289abdd96e6d69c2d63da5a:openrdate/.footprint
-f:30591f4d63ae9ff02ef97775e6d85a82:openrdate/ntpleaps.patch
-f:5a84634e148e20b426d4d0ef0cddaf7d:openrdate/ntp.patch
 f:d32239bcb673463ab874e80d47fae504:COPYING
 f:9c31c26908b25514c7947a14f523e05c:linux-pam/.signature
 f:6362b0bfc92504b3f8aec8ed3cd7b861:linux-pam/common-account
