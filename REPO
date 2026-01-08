@@ -16,9 +16,9 @@ f:3765e84098080584a33fae6f7eac0d76:kbd/.signature
 f:498bb149c96c4a935743015bed7c3393:kbd/Pkgfile
 f:e6d37048fd3de20cdd1d623eb0faa602:kbd/.footprint
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
-f:39a20877cd23acae5e93e08065e70b76:gcc/.signature
+f:f46bb0023c87ab4292e9f8d0b0785c7d:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
-f:0d2e852d7bd541b3216e3e4c10c6417e:gcc/Pkgfile
+f:f8fdb7092d6f07d05d460de6df98517d:gcc/Pkgfile
 f:ec3fb729d4c65db2650e3025c7d0de78:gcc/.footprint
 f:ee4f17d3eb968d9fe8825acba048978a:readline/.signature
 f:553cf04fdeec54dca12062864c3ffba3:readline/inputrc
