@@ -18,6 +18,10 @@ build() {
 
   $SRC/$name-$version/configure \
     --build=arm-unknown-linux-gnueabihf \
+    --with-arch=armv7-a \
+    --with-fpu=vfpv3-d16 \
+    --with-abi=aapcs-linux --with-mode=arm \
+    --with-float=hard \
     --prefix=/usr \
     --libexecdir=/usr/lib \
     --enable-languages=c,c++,objc \
@@ -27,8 +31,6 @@ build() {
     --enable-shared \
     --with-x=no \
     --with-mode=arm \
-    --with-abi=aapcs-linux \
-    --with-float=hard \
     --with-system-zlib \
     --disable-nls \
     --with-pkgversion="CRUX-ARM"
