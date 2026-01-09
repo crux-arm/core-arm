@@ -14,7 +14,7 @@ build () {
   cd $name-$version
 
   sed -i -e "s|\--static||g" -e "s|\-static||g" Makefile
-  make DESTDIR=$PKG install
+  make DESTDIR=$PKG install MANDIR=/usr/share/man
 
   install -D -m 0644 $SRC/pkgmk.conf $PKG/etc/pkgmk.conf
 }
