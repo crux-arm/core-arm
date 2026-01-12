@@ -6,12 +6,12 @@
 
 name=glibc
 version=2.40
-release=2
-_kernel_version=6.6.30
+release=3
+_kernel_version=6.6.119
 
 source=(https://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
   http://www.kernel.org/pub/linux/kernel/v6.x/linux-$_kernel_version.tar.xz \
-  glibc-$version-1.patch \
+  glibc-$version-2.patch \
   glibc-2.39-fhs-1.patch \
   hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
   locale-gen locale.gen.in)
@@ -22,7 +22,7 @@ build() {
   make -C $SRC/linux-$_kernel_version INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
-  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-1.patch
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-2.patch
   patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/glibc-2.39-fhs-1.patch
 
   export ASFLAGS="$CFLAGS"
