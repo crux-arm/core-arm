@@ -81,7 +81,7 @@ cat > $PKG/etc/os-release << EOF
 NAME=CRUX-ARM
 VERSION_ID="$version"
 ID=crux-arm
-PRETTY_NAME="CRUX-ARM"
+PRETTY_NAME="CRUX-ARM armhf"
 HOME_URL="https://crux-arm.nu"
 BUG_REPORT_URL="https://crux-arm.nu/bugs"
 EOF
