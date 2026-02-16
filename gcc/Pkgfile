@@ -51,7 +51,7 @@ build() {
     --enable-default-pie \
     --enable-default-ssp \
     --enable-host-pie \
-    --with-pkgversion="CRUX-ARM" \
+    --with-pkgversion="CRUX-ARM armhf" \
     --with-x=no \
     --disable-fixincludes \
     --disable-nls
