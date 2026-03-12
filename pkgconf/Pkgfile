@@ -6,25 +6,25 @@ name=pkgconf
 version=2.5.1
 release=1
 source=(https://distfiles.ariadne.space/pkgconf/pkgconf-$version.tar.xz
-  arm-unknown-linux-gnueabihf.personality)
+    arm-unknown-linux-gnueabihf.personality)
 
 build() {
-  meson setup build $name-$version \
-    --prefix=/usr \
-    --buildtype=plain \
-    --wrap-mode=nodownload \
-    -D b_lto=true \
-    -D b_pie=true \
-    -D tests=disabled
-  meson compile -C build -j ${JOBS:-1}
-  DESTDIR=$PKG meson install -C build
-  
-  install -Dt $PKG/usr/share/pkgconfig/personality.d -m644 \
-    arm-unknown-linux-gnueabihf.personality
-  ln -s pkgconf $PKG/usr/bin/arm-unknown-linux-gnueabifh-pkg-config
-  ln -s pkgconf $PKG/usr/bin/pkg-config
-  
-  ln -s pkgconf.1 $PKG/usr/share/man/man1/pkg-config.1
-  
-  rm -rf $PKG/usr/share/doc
+    meson setup build $name-$version \
+      --prefix=/usr \
+      --buildtype=plain \
+      --wrap-mode=nodownload \
+      -D b_lto=true \
+      -D b_pie=true \
+      -D tests=disabled
+    meson compile -C build -j ${JOBS:-1}
+    DESTDIR=$PKG meson install -C build
+    
+    install -Dt $PKG/usr/share/pkgconfig/personality.d -m644 \
+      arm-unknown-linux-gnueabihf.personality
+    ln -s pkgconf $PKG/usr/bin/arm-unknown-linux-gnueabifh-pkg-config
+    ln -s pkgconf $PKG/usr/bin/pkg-config
+    
+    ln -s pkgconf.1 $PKG/usr/share/man/man1/pkg-config.1
+    
+    rm -rf $PKG/usr/share/doc
 }
