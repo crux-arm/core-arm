@@ -8,74 +8,74 @@ name=gcc
 version=14.3.0
 release=1
 source=(https://sourceware.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz \
-        $name-nocheck-fixincludes.patch)
+          $name-nocheck-fixincludes.patch)
 
 build() {
-  # fix libasan.a
-  sed -e '/static.*SIGSTKSZ/d' \
-    -e 's/return kAltStackSize/return SIGSTKSZ * 4/' \
-    -i $name-$version/libsanitizer/sanitizer_common/sanitizer_posix_libcdep.cpp
+    # fix libasan.a
+    sed -e '/static.*SIGSTKSZ/d' \
+      -e 's/return kAltStackSize/return SIGSTKSZ * 4/' \
+      -i $name-$version/libsanitizer/sanitizer_common/sanitizer_posix_libcdep.cpp
 
-  sed -e '/m64=/s/lib64/lib/' -i $SRC/$name-$version/gcc/config/i386/t-linux64
+    sed -e '/m64=/s/lib64/lib/' -i $SRC/$name-$version/gcc/config/i386/t-linux64
 
-  patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
+    patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
 
-  # pipe fails tests
-  CFLAGS=${CFLAGS/-pipe/}
-  CXXFLAGS=${CXXFLAGS/-pipe/}
+    # pipe fails tests
+    CFLAGS=${CFLAGS/-pipe/}
+    CXXFLAGS=${CXXFLAGS/-pipe/}
 
-  mkdir build
-  cd build
+    mkdir build
+    cd build
 
-  $SRC/$name-$version/configure \
-    --build=arm-unknown-linux-gnueabihf \
-    --prefix=/usr \
-    --libexecdir=/usr/lib \
-    --enable-threads=posix \
-    --with-build-config=bootstrap-lto \
-    --with-linker-hash-style=gnu \
-    --with-system-zlib \
-    --enable-languages=c,c++,lto \
-    --enable-stage1-languages=c,lto \
-    --enable-link-serialization=1 \
-    --enable-linker-build-id \
-    --enable-__cxa_atexit \
-    --enable-clocale=gnu \
-    --enable-shared \
-    --enable-lto \
-    --disable-multilib \
-    --enable-plugin \
-    --with-mode=arm \
-    --with-abi=aapcs-linux \
-    --with-float=hard \
-    --enable-default-pie \
-    --enable-default-ssp \
-    --enable-host-pie \
-    --with-pkgversion="CRUX-ARM armhf" \
-    --with-x=no \
-    --disable-fixincludes \
-    --disable-nls
+    $SRC/$name-$version/configure \
+      --build=arm-unknown-linux-gnueabihf \
+      --prefix=/usr \
+      --libexecdir=/usr/lib \
+      --enable-threads=posix \
+      --with-build-config=bootstrap-lto \
+      --with-linker-hash-style=gnu \
+      --with-system-zlib \
+      --enable-languages=c,c++,lto \
+      --enable-stage1-languages=c,lto \
+      --enable-link-serialization=1 \
+      --enable-linker-build-id \
+      --enable-__cxa_atexit \
+      --enable-clocale=gnu \
+      --enable-shared \
+      --enable-lto \
+      --disable-multilib \
+      --enable-plugin \
+      --with-mode=arm \
+      --with-abi=aapcs-linux \
+      --with-float=hard \
+      --enable-default-pie \
+      --enable-default-ssp \
+      --enable-host-pie \
+      --with-pkgversion="CRUX-ARM armhf" \
+      --with-x=no \
+      --disable-fixincludes \
+      --disable-nls
 
-  make -O STAGE1_CFLAGS="-O2" \
-    BOOT_CFLAGS="$CFLAGS" \
-    BOOT_LDFLAGS="$LDFLAGS" \
-    LDFLAGS_FOR_TARGET="$LDFLAGS" \
-    bootstrap
-  make -j1 DESTDIR=$PKG install
+    make -O STAGE1_CFLAGS="-O2" \
+      BOOT_CFLAGS="$CFLAGS" \
+      BOOT_LDFLAGS="$LDFLAGS" \
+      LDFLAGS_FOR_TARGET="$LDFLAGS" \
+      bootstrap
+    make -j1 DESTDIR=$PKG install
 
-  install -d $PKG/lib
-  ln -sf ../usr/bin/cpp $PKG/lib/cpp
-  ln -sf gcc $PKG/usr/bin/cc
-  ln -sf g++ $PKG/usr/bin/c++
+    install -d $PKG/lib
+    ln -sf ../usr/bin/cpp $PKG/lib/cpp
+    ln -sf gcc $PKG/usr/bin/cc
+    ln -sf g++ $PKG/usr/bin/c++
 
-  rm -r $PKG/usr/share/{info,$name-$version}
-  rm -r $PKG/usr/bin/*-unknown-linux-*
-  rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed}
+    rm -r $PKG/usr/share/{info,$name-$version}
+    rm -r $PKG/usr/bin/*-unknown-linux-*
+    rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed}
 
-  for D in lib; do
-    install -d -m 0755 $PKG/usr/share/gdb/auto-load/usr/${D}
-    mv $PKG/usr/${D}/libstdc++.so.*-gdb.py $PKG/usr/share/gdb/auto-load/usr/${D}
-  done
+    for D in lib; do
+      install -d -m 0755 $PKG/usr/share/gdb/auto-load/usr/${D}
+      mv $PKG/usr/${D}/libstdc++.so.*-gdb.py $PKG/usr/share/gdb/auto-load/usr/${D}
+    done
 
-  sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
+    sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
 }
