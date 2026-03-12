@@ -10,11 +10,11 @@ release=1
 source=(https://gmplib.org/download/gmp/gmp-$version.tar.xz)
 
 build() {
-  cd gmp-$version
-  ./configure --prefix=/usr \
-              --enable-cxx \
-              --build=arm-unknown-linux-gnueabihf
-  make
-  make DESTDIR=$PKG install
-  rm -r $PKG/usr/share
+    cd gmp-$version
+    ./configure --prefix=/usr \
+                --enable-cxx \
+                --build=arm-unknown-linux-gnueabihf
+    make
+    make DESTDIR=$PKG install
+    rm -r $PKG/usr/share
 }
