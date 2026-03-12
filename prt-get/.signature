@@ -1,6 +1,6 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dSYwWxKa+lwYOxAmDB/Qt/yQDBfAzPpAR8RHuKE0/8IU+WRgtG5fau2yW8s1jG7xLIxtFQkIfTeTMIx0PzV+hQM=
-SHA256 (Pkgfile) = f676de070e340c8024392de78138d950b287df8398a3a08eca54980acd406f19
+RWTMGLGEHsm4dfjTnn7HeUqIoB+0bF04yukjANFu7FcYAJPXXuDdo/h2RNoeAOZeedqXGhGz50vfL4ddL9Fdta8ap/X71pWdOQI=
+SHA256 (Pkgfile) = cf8c821cf3a4ebea79ecd1262b2b06d6a47d56ca77e1526a0f741adbfa2de576
 SHA256 (.footprint) = 26802764ae3ae1e1a73ea56c859b3415e250a72ea444af410381df8c8f5d3ac8
 SHA256 (prt-get-5.19.6.tar.xz) = 6ea89df308e19a6239f260c91036805cd2063d0cd24a7427235849634dd49f0d
 SHA256 (prt-get.conf) = ff8fa0131fceaf370953e448353afdd37501bef7175545d25e2cfcf11863b562
