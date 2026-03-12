@@ -1,5 +1,5 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dWUU7fb1wBV5jS3yeVS8+TtRzp5/bM0/HoL5Ld3qTfCzvjqpD7RqW7lx6+SWMLBs6VSjVee/gYqjrZ3HCxJPCA8=
-SHA256 (Pkgfile) = 9008be1daa1276ea5e42563e6f4b7cfb017335060c70e1a1338fc3ba8457ef16
+RWTMGLGEHsm4dTHF6PPxPyM00whbSlE79GRe6jefdcbmpHId2gaJHgm+zZQ9eaXT97MmoeBGRClZtshJ1hT6TrmybSo/yeyaEQg=
+SHA256 (Pkgfile) = 2f375b8a763cb987be88e7f53026c7e261f0db77eada281443e6126b23041e07
 SHA256 (.footprint) = 8d6c40432ba33e20b325593c119d1bf4d7f2967960bad3daaf17e47b8ff9aaee
 SHA256 (binutils-2.43.1.tar.bz2) = becaac5d295e037587b63a42fad57fe3d9d7b83f478eb24b67f9eec5d0f1872f
