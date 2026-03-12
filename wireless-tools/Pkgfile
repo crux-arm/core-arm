@@ -10,18 +10,18 @@ release=1
 source=(https://hewlettpackard.github.io/$name/${name/-/_}.$version.tar.gz)
 
 build() {
-  cd ${name/-/_}.${version%.*}
+    cd ${name/-/_}.${version%.*}
 
-  # fix compiler flags, build shared library, don't run ldconfig
-  sed -i Makefile \
-    -e "s|CFLAGS=|CFLAGS=$CFLAGS |" \
-    -e "/^BUILD_STATIC/d" \
-    -e "/ldconfig/d"
+    # fix compiler flags, build shared library, don't run ldconfig
+    sed -i Makefile \
+      -e "s|CFLAGS=|CFLAGS=$CFLAGS |" \
+      -e "/^BUILD_STATIC/d" \
+      -e "/ldconfig/d"
 
-  make
-  make install \
-    PREFIX=$PKG/usr \
-    INSTALL_MAN=$PKG/usr/share/man
+    make
+    make install \
+      PREFIX=$PKG/usr \
+      INSTALL_MAN=$PKG/usr/share/man
 
-  rm -r $PKG/usr/share/man/{cs,fr}*/
+    rm -r $PKG/usr/share/man/{cs,fr}*/
 }
