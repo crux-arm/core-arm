@@ -9,22 +9,22 @@ release=1
 source=(https://github.com/rhash/RHash/archive/v$version/$name-$version.tar.gz)
 
 build() {
-  cd RHash-$version
-  
-  ./configure  \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --enable-lib-{static,shared} \
-    --extra-cflags="$CFLAGS" \
-    --extra-ldflags="$LDFLAGS"
-  
-  make -j1
-#  Avoid tests under docker
-#  make test test-lib
-  
-  make DESTDIR=$PKG -j1 install
-  make -C librhash DESTDIR=$PKG -j1 install-lib-headers install-so-link
-  
-  install -Dm0644 -o root -g root dist/librhash.pc \
-    $PKG/usr/lib/pkgconfig/librhash.pc
+    cd RHash-$version
+    
+    ./configure  \
+      --prefix=/usr \
+      --sysconfdir=/etc \
+      --enable-lib-{static,shared} \
+      --extra-cflags="$CFLAGS" \
+      --extra-ldflags="$LDFLAGS"
+    
+    make -j1
+    # Avoid tests under docker
+    # make test test-lib
+    
+    make DESTDIR=$PKG -j1 install
+    make -C librhash DESTDIR=$PKG -j1 install-lib-headers install-so-link
+    
+    install -Dm0644 -o root -g root dist/librhash.pc \
+      $PKG/usr/lib/pkgconfig/librhash.pc
 }
