@@ -1,6 +1,6 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dYLf2VnCNCDx8j0KBiEbTOg/3DhcK1cNUd3UnzQAn73nyZZwKG+nKrzLtMjvnTuCigMfoxmxoCMBFpptUd/AfgU=
-SHA256 (Pkgfile) = def07be96d74a4f5d2df54acd0a0f0c48f5c25b4845196abffd1d886337bc59d
+RWTMGLGEHsm4dafrEdxyT7U8JXuGaokngQI7hxLQm587n2kfMX6CoRUriVx1ivP7dpLYJTtIogOC7WkZ3Wuc7OinBVmBDJxNnwk=
+SHA256 (Pkgfile) = 2358ef18f8af1867930882688a701fb34701219242fe498c68fc57c552d44e0e
 SHA256 (.footprint) = 7d143f18f63bba5569d729eefd0d0f04ae4b0539f8bd71f9cfd6955b9e7c639d
 SHA256 (pkgutils-5.40.11.tar.xz) = 926f98704e72d9dbfae156f60ea26d97a1c7d703a36f3db2f57e553b2bdfacb6
 SHA256 (pkgmk.conf) = 6a17b974c123388312c8ef7bd4587396da6db48a5190934dcf1eec5c09defcdd

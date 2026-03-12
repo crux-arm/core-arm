@@ -8,11 +8,11 @@ name=pkgutils
 version=5.40.11
 release=1
 source=(http://crux.nu/files/$name-$version.tar.xz \
-        pkgmk.conf)
+          pkgmk.conf)
 
 build () {
-  cd $name-$version
-  make DESTDIR=$PKG install
+    cd $name-$version
+    make DESTDIR=$PKG install
 
-  install -D -m 0644 $SRC/pkgmk.conf $PKG/etc/pkgmk.conf
+    install -D -m 0644 $SRC/pkgmk.conf $PKG/etc/pkgmk.conf
 }
