@@ -1,0 +1,71 @@
+# Description: Library to create and read several archive formats
+# URL: https://www.libarchive.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: acl bzip2 lzo zstd
+
+name=libarchive
+version=3.8.6
+release=1
+source=(https://github.com/libarchive/libarchive/releases/download/v$version/$name-$version.tar.xz)
+
+build() {
+    local cmake_options=(
+        -S $name-$version -G Ninja
+        -D CMAKE_INSTALL_PREFIX=/usr
+        -D CMAKE_INSTALL_LIBDIR=lib
+        -D CMAKE_BUILD_TYPE=Release
+        -D ENABLE_ICONV=OFF
+        -D ENABLE_LIBB2=OFF
+        -D ENABLE_LIBXML2=OFF
+        -D ENABLE_NETTLE=OFF
+        -D ENABLE_TEST=OFF
+        -D BUILD_TESTING=OFF
+        -D ENABLE_LZ4=OFF
+    )
+
+    cmake "${cmake_options[@]}" \
+        -B build-shared \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+        -D ENABLE_TAR=OFF \
+        -D ENABLE_CPIO=OFF \
+        -D ENABLE_CAT=OFF \
+        -D ENABLE_UNZIP=OFF \
+        -D CMAKE_EXE_LINKER_FLAGS="-latomic" \
+        -D CMAKE_SHARED_LINKER_FLAGS="-latomic" \
+        -Wno-dev
+    cmake --build build-shared -j ${JOBS:-1}
+    DESTDIR=$PKG cmake --install build-shared
+
+    cmake "${cmake_options[@]}" \
+        -B build-static \
+        -D CMAKE_C_FLAGS_RELEASE="$CFLAGS -ffat-lto-objects -flto -fPIC" \
+        -D CMAKE_EXE_LINKER_FLAGS="-static" \
+        -D BUILD_SHARED_LIBS=OFF \
+        -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
+        -D ENABLE_TAR=ON \
+        -D ENABLE_CPIO=ON \
+        -D ENABLE_CAT=ON \
+        -D ENABLE_UNZIP=ON \
+        -D OPENSSL_CRYPTO_LIBRARY=/usr/lib/libcrypto.a \
+        -D ZSTD_LIBRARY=/usr/lib/libzstd.a \
+        -D ACL_LIBRARY=/usr/lib/libacl.a \
+        -D pkgcfg_lib_LIBATTR_attr=/usr/lib/libattr.a \
+        -D EXPAT_LIBRARY_RELEASE=/usr/lib/libexpat.a \
+        -D OPENSSL_SSL_LIBRARY=/usr/lib/libssl.a \
+        -D LIBLZMA_LIBRARY_RELEASE=/usr/lib/liblzma.a \
+        -D ZLIB_LIBRARY_RELEASE=/usr/lib/libz.a \
+        -D BZIP2_LIBRARY_RELEASE=/usr/lib/libbz2.a \
+        -D ENABLE_TAR_SHARED=OFF \
+        -D ENABLE_CPIO_SHARED=OFF \
+        -D ENABLE_CAT_SHARED=OFF \
+        -D ENABLE_UNZIP_SHARED=OFF \
+        -D CMAKE_EXE_LINKER_FLAGS="-latomic" \
+        -D CMAKE_SHARED_LINKER_FLAGS="-latomic" \
+        -Wno-dev
+    cmake --build build-static -j ${JOBS:-1} \
+      --target bsdcat \
+      --target bsdcpio \
+      --target bsdtar \
+      --target bsdunzip
+    DESTDIR=$PKG cmake --install build-static
+}
