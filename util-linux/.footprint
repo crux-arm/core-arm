@@ -34,6 +34,7 @@ drwxr-xr-x	root/root	sbin/
 -rwxr-xr-x	root/root	sbin/blockdev
 -rwxr-xr-x	root/root	sbin/cfdisk
 -rwxr-xr-x	root/root	sbin/chcpu
+-rwxr-xr-x	root/root	sbin/copyfilerange
 -rwxr-xr-x	root/root	sbin/ctrlaltdel
 -rwxr-xr-x	root/root	sbin/fdisk
 -rwxr-xr-x	root/root	sbin/findfs
@@ -74,6 +75,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/fallocate
 -rwxr-xr-x	root/root	usr/bin/fincore
 -rwxr-xr-x	root/root	usr/bin/flock
+-rwxr-xr-x	root/root	usr/bin/getino
 -rwxr-xr-x	root/root	usr/bin/getopt
 -rwxr-xr-x	root/root	usr/bin/hardlink
 -rwxr-xr-x	root/root	usr/bin/hexdump
@@ -189,6 +191,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/colcrt.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/colrm.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/column.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/copyfilerange.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/coresched.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/dmesg.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/eject.1.gz
@@ -198,6 +201,7 @@ drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/fallocate.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/fincore.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/flock.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/getino.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/getopt.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/hardlink.1.gz
 -rw-r--r--	root/root	usr/share/man/man1/hexdump.1.gz
