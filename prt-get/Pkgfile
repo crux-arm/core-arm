@@ -5,7 +5,7 @@
 # Depends on:
 
 name=prt-get
-version=5.19.6
+version=5.19.9
 release=1
 source=(http://crux.nu/files/prt-get-$version.tar.xz
           prt-get.conf prt-get.aliases)
