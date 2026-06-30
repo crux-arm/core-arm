@@ -1,6 +1,6 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4ddme+xYDV++qhzzSM0by0vVZWELMtxwDnz9o9JrskqpHi/M3wrtbtteHTH84hBYEr72u8FKEAvho6Zijp1BBVw8=
-SHA256 (Pkgfile) = c35879e67845d8bbdcc30b127d5a8b315e6a4ecba9f042ac3c1c4a833cc2da94
-SHA256 (.footprint) = c48053559633c88ec26027a02d2b7d65f5c45052071f6398f1700205e52a34ed
-SHA256 (gcc-14.3.0.tar.xz) = e0dc77297625631ac8e50fa92fffefe899a4eb702592da5c32ef04e2293aca3a
+RWTMGLGEHsm4dczMdVO0yFd0mtAyGsKh2zIF6+2ZACawme526WAK53/NV2/EDDBwWGkOx4qSolQa87P64hP/Xk/wEDGeFDmRGQo=
+SHA256 (Pkgfile) = caa38682fa064b96e3792dd480eb33f766165cb3f3943e8d374338975de021c2
+SHA256 (.footprint) = 3eac31d5bb47b5137d69b018e635f9c4deaf1343bff1cf0a79cc4045aeb3967c
+SHA256 (gcc-14.4.0.tar.xz) = 752b6f567beac83159c77a7680b1316bdd784738bff9a9d070112c09da90f6d9
 SHA256 (gcc-nocheck-fixincludes.patch) = 97f78d8c57e28cb8cc5c38f637783187b52ee66709c0cd22d083270aa7e5c05c

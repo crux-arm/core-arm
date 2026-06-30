@@ -5,10 +5,10 @@
 # Depends on: libmpc zstd
 
 name=gcc
-version=14.3.0
+version=14.4.0
 release=1
 source=(https://sourceware.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz \
-          $name-nocheck-fixincludes.patch)
+    $name-nocheck-fixincludes.patch)
 
 build() {
     # fix libasan.a
@@ -28,39 +28,39 @@ build() {
     cd build
 
     $SRC/$name-$version/configure \
-      --build=arm-unknown-linux-gnueabihf \
-      --prefix=/usr \
-      --libexecdir=/usr/lib \
-      --enable-threads=posix \
-      --with-build-config=bootstrap-lto \
-      --with-linker-hash-style=gnu \
-      --with-system-zlib \
-      --enable-languages=c,c++,lto \
-      --enable-stage1-languages=c,lto \
-      --enable-link-serialization=1 \
-      --enable-linker-build-id \
-      --enable-__cxa_atexit \
-      --enable-clocale=gnu \
-      --enable-shared \
-      --enable-lto \
-      --disable-multilib \
-      --enable-plugin \
-      --with-mode=arm \
-      --with-abi=aapcs-linux \
-      --with-float=hard \
-      --enable-default-pie \
-      --enable-default-ssp \
-      --enable-host-pie \
-      --with-pkgversion="CRUX-ARM armhf" \
-      --with-x=no \
-      --disable-fixincludes \
-      --disable-nls
+        --build=arm-unknown-linux-gnueabihf \
+        --prefix=/usr \
+        --libexecdir=/usr/lib \
+        --enable-threads=posix \
+        --with-build-config=bootstrap-lto-lean \
+        --with-linker-hash-style=gnu \
+        --with-system-zlib \
+        --enable-languages=c,c++,lto \
+        --enable-stage1-languages=c,lto \
+        --enable-link-serialization=1 \
+        --enable-linker-build-id \
+        --enable-__cxa_atexit \
+        --enable-clocale=gnu \
+        --enable-shared \
+        --enable-lto \
+        --disable-multilib \
+        --enable-plugin \
+        --with-mode=arm \
+        --with-abi=aapcs-linux \
+        --with-float=hard \
+        --enable-default-pie \
+        --enable-default-ssp \
+        --enable-host-pie \
+        --with-pkgversion="CRUX-ARM armhf" \
+        --with-x=no \
+        --disable-fixincludes \
+        --disable-nls
 
     make -O STAGE1_CFLAGS="-O2" \
-      BOOT_CFLAGS="$CFLAGS" \
-      BOOT_LDFLAGS="$LDFLAGS" \
-      LDFLAGS_FOR_TARGET="$LDFLAGS" \
-      bootstrap
+        BOOT_CFLAGS="$CFLAGS" \
+        BOOT_LDFLAGS="$LDFLAGS" \
+        LDFLAGS_FOR_TARGET="$LDFLAGS" \
+        bootstrap
     make -j1 DESTDIR=$PKG install
 
     install -d $PKG/lib
@@ -76,6 +76,12 @@ build() {
       install -d -m 0755 $PKG/usr/share/gdb/auto-load/usr/${D}
       mv $PKG/usr/${D}/libstdc++.so.*-gdb.py $PKG/usr/share/gdb/auto-load/usr/${D}
     done
+
+    sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
+
+    mkdir $PKG/usr/lib/bfd-plugins
+    ln -sfv ../../lib/gcc/$($PKG/usr/bin/gcc -dumpmachine)/$version/liblto_plugin.so \
+        $PKG/usr/lib/bfd-plugins/
 
     sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
 }
