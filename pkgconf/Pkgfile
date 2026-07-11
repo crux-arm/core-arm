@@ -1,9 +1,10 @@
 # Description: A system for managing library compile/link flags.
 # URL: https://github.com/pkgconf/pkgconf/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=pkgconf
-version=2.5.1
+version=3.0.0
 release=1
 source=(https://distfiles.ariadne.space/pkgconf/pkgconf-$version.tar.xz
     arm-unknown-linux-gnueabihf.personality)
@@ -14,8 +15,7 @@ build() {
       --buildtype=plain \
       --wrap-mode=nodownload \
       -D b_lto=true \
-      -D b_pie=true \
-      -D tests=disabled
+      -D b_pie=true 
     meson compile -C build -j ${JOBS:-1}
     DESTDIR=$PKG meson install -C build
     
