@@ -4,7 +4,7 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=pkgconf
-version=3.0.0
+version=3.0.1
 release=1
 source=(https://distfiles.ariadne.space/pkgconf/pkgconf-$version.tar.xz
     arm-unknown-linux-gnueabihf.personality)

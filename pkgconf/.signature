@@ -1,6 +1,6 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dQjezbXDqIS8o6MSWeU2d3QLZFhWKP6DfCputPnR9aiFhI9R3M0xE9u8VrO/08VgawxZCrT3pyOCj9UH5A+vWwU=
-SHA256 (Pkgfile) = 504042de8ec290e89a22957c877a0ac79e521ee10fe3a10e419d4f1d9a71fed0
+RWTMGLGEHsm4dRWnRkpEjar3YE3uibO/QcP0bhyKi6vAJWHBK50N6CY848QtVuRPBGdLsO4GQTgps1N6T+OBOqr3lVRXJECHSQ4=
+SHA256 (Pkgfile) = fcf0547dda75ddeeb37ed2986deaf4c47d20a2cb79809207036aa388c7dc2bbb
 SHA256 (.footprint) = 5cff5a2125701365d35f4eaa6b6a054f02dc8dff337c5ccef645dbf457574cf4
-SHA256 (pkgconf-3.0.0.tar.xz) = 40c814bd28bbbe331468a84bde67c53ae382dd226baec043f3e7c5ba3f2129e4
+SHA256 (pkgconf-3.0.1.tar.xz) = 640b0d03a6d9e385d8bdcdac071a5cdf5fbd3f45942d454b711ae46271489b30
 SHA256 (arm-unknown-linux-gnueabihf.personality) = 532b2a3e88ab5fd001f8c2f91ceddce9931db664fd603aa86b76fe2886c44b2c
