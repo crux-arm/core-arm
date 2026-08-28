@@ -4,26 +4,26 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=openssl
-version=3.6.3
+version=3.6.4
 release=1
 source=(https://github.com/openssl/openssl/releases/download/$name-$version/$name-$version.tar.gz
-          mksslcert.sh)
+    mksslcert.sh)
 
 build() {
     cd $name-$version
 
-    export MAKEFLAGS="$MAKEFLAGS -j1"
+#    export MAKEFLAGS="$MAKEFLAGS -j1"
 
     ./config \
-      --prefix=/usr \
-      --libdir=lib \
-      --openssldir=/etc/ssl \
-      disable-tests \
-      enable-seed enable-rfc3779 \
-      no-mdc2 no-ec2m no-sm2 no-sm4 \
-      shared \
-      threads \
-      zlib
+        --prefix=/usr \
+        --libdir=lib \
+        --openssldir=/etc/ssl \
+        enable-seed enable-rfc3779 \
+        shared \
+        threads \
+        zlib \
+        no-mdc2 no-ec2m no-sm2 no-sm4 \
+        disable-tests
 
     sed -e "s|-O3|$CFLAGS|" -e "s|-march=armv7-a[^[:space:]]*[[:space:]]*||g" -i Makefile
 
