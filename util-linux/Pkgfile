@@ -5,15 +5,11 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=util-linux
-version=2.42.3
+version=2.42.4
 release=1
-source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
-        bits
-        a323dddbcd1ed05a10e7e870b3e1a48b4ed44a43.patch)
+source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
 
 build() {
-
-    patch -Np1 -d $name-$version -i $SRC/a323dddbcd1ed05a10e7e870b3e1a48b4ed44a43.patch
 
     meson setup $name-$version build \
         --prefix=/usr \
@@ -39,7 +35,6 @@ build() {
         -D build-newgrp=disabled \
         -D build-bfs=disabled \
         -D build-minix=disabled
-
 
     meson compile -C build -j ${JOBS:-1}
     DESTDIR=$PKG meson install -C build
