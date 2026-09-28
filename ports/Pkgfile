@@ -5,8 +5,8 @@
 # Depends on:
 
 name=ports
-version=1.6
-release=4
+version=1.7
+release=1
 source=(http://crux.nu/files/tools/ports/$name-$version.tar.gz \
           core.pub opt.pub xorg.pub contrib.pub \
           core.rsync opt.rsync xorg.rsync contrib.rsync.inactive \
@@ -16,7 +16,7 @@ source=(http://crux.nu/files/tools/ports/$name-$version.tar.gz \
 build () {
     cd $name-$version
     make
-    make DESTDIR=$PKG MANDIR=/usr/share/man install
+    make DESTDIR=$PKG install
 
     install -m 0644 $SRC/*.{pub,rsync,inactive} $PKG/etc/ports
 }
