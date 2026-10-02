@@ -5,7 +5,7 @@
 # Depends on: bzip2 expat gdbm libffi libnsl libtirpc mpdecimal sqlite3 xz
 
 name=python3
-version=3.12.14
+version=3.12.15
 release=1
 source=(https://www.python.org/ftp/python/${version%rc*}/Python-$version.tar.xz)
 
@@ -30,21 +30,21 @@ build() {
     autoheader
 
     ./configure \
-      --prefix=/usr \
-      --enable-shared \
-      --enable-optimizations \
-      --enable-ipv6 \
-      --enable-loadable-sqlite-extensions \
-      --with-computed-gotos \
-      --with-dbmliborder=gdbm:ndbm \
-      --with-lto \
-      --with-pkg-config=yes \
-      --with-system-expat \
-      --with-system-ffi \
-      --with-system-libmpdec \
-      --with-tzpath=/usr/share/zoneinfo \
-      --build=aarch64-unknown-linux-gnu \
-      --without-ensurepip
+        --prefix=/usr \
+        --enable-shared \
+        --enable-optimizations \
+        --enable-ipv6 \
+        --enable-loadable-sqlite-extensions \
+        --with-computed-gotos \
+        --with-dbmliborder=gdbm:ndbm \
+        --with-lto \
+        --with-pkg-config=yes \
+        --with-system-expat \
+        --with-system-ffi \
+        --with-system-libmpdec \
+        --with-tzpath=/usr/share/zoneinfo \
+        --build=aarch64-unknown-linux-gnu \
+        --without-ensurepip
 
     make EXTRA_CFLAGS="$CFLAGS"
     make -j1 EXTRA_CFLAGS="$CFLAGS" DESTDIR=$PKG altinstall maninstall
@@ -61,16 +61,16 @@ build() {
     _pybasever=${version%.*}
     install -dm755 $PKG/usr/lib/python${_pybasever}/Tools/{i18n,scripts}
     install -m755 Tools/i18n/{msgfmt,pygettext}.py \
-      $PKG/usr/lib/python${_pybasever}/Tools/i18n/
+        $PKG/usr/lib/python${_pybasever}/Tools/i18n/
     install -m755 Tools/scripts/{README,*py} \
-      $PKG/usr/lib/python${_pybasever}/Tools/scripts/
+        $PKG/usr/lib/python${_pybasever}/Tools/scripts/
 
     find $PKG/usr/lib/python${version%.*} \( \
-      -iname "*README*" -o \
-      -iname "*ChangeLog*" -o \
-      -iname "*NEWS*" -o \
-      -iname "*TODO*" -o \
-      -iname "*CREDITS*" -o \
-      -iname "*HISTORY*" \) \
-      -type f -delete
+        -iname "*README*" -o \
+        -iname "*ChangeLog*" -o \
+        -iname "*NEWS*" -o \
+        -iname "*TODO*" -o \
+        -iname "*CREDITS*" -o \
+        -iname "*HISTORY*" \) \
+        -type f -delete
 }
