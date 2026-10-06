@@ -24,6 +24,7 @@ input::22:
 kvm::23:
 dhcpcd::24:
 sgx::25:
+render::26:
 nobody::99:
 messagebus::81:
 users::100:
