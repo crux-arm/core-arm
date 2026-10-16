@@ -1,5 +1,5 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dRIN7hwvJmEOrwU3lukuVkPHaAhHSJIJUn1tPKqLOgOuWkEuoAUlCnDXhpRu/YPIOU3rCfGxABP+iFObU+Yo8AM=
-SHA256 (Pkgfile) = ac1c0c92d7ce7f97a4172fa8bec26cae462dd2010fec1fc7de27f96bb48baf05
-SHA256 (.footprint) = 7715af3a0b9370a06c5deab8169a1d0adcca16c410919776d298787bdeeb1ac1
-SHA256 (libarchive-3.8.9.tar.xz) = 888c934f9d95648ecb9163dc8e23ab80a476ecb81a8f1154704a227b5b676dde
+RWTMGLGEHsm4dZxhqvOJK67pAPaY2Z1pesnKOP5zVoOAmJhxVRpBHgfRlWU/3GyP9x4Z7O8s7XLVCGNH5yoeG9VDJtCFSK8wMw0=
+SHA256 (Pkgfile) = f37d2c53e4cb412bfc2a502efb7d2c0178b774c057714347cf2614feec02e48a
+SHA256 (.footprint) = 1a98f1150c52f95ae86c5224e3afcab2d647e7f6cae2c0326da1060f1d367194
+SHA256 (libarchive-3.8.10.tar.xz) = 56cad765459d5ee25a3b761f90c47d99379d28297fbfb72d908880d6b875fb96
