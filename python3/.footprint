@@ -2481,9 +2481,9 @@ drwxr-xr-x	root/root	usr/lib/python3.12/lib-dynload/
 -rwxr-xr-x	root/root	usr/lib/python3.12/lib-dynload/zlib.cpython-312-arm-linux-gnueabihf.so
 drwxr-xr-x	root/root	usr/lib/python3.12/lib2to3/
 -rw-r--r--	root/root	usr/lib/python3.12/lib2to3/Grammar.txt
--rw-r--r--	root/root	usr/lib/python3.12/lib2to3/Grammar3.12.15.final.0.pickle
+-rw-r--r--	root/root	usr/lib/python3.12/lib2to3/Grammar3.12.16.final.0.pickle
 -rw-r--r--	root/root	usr/lib/python3.12/lib2to3/PatternGrammar.txt
--rw-r--r--	root/root	usr/lib/python3.12/lib2to3/PatternGrammar3.12.15.final.0.pickle
+-rw-r--r--	root/root	usr/lib/python3.12/lib2to3/PatternGrammar3.12.16.final.0.pickle
 -rw-r--r--	root/root	usr/lib/python3.12/lib2to3/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.12/lib2to3/__main__.py
 drwxr-xr-x	root/root	usr/lib/python3.12/lib2to3/__pycache__/
@@ -4407,6 +4407,7 @@ drwxr-xr-x	root/root	usr/lib/python3.12/test/certdata/capath/
 -rw-r--r--	root/root	usr/lib/python3.12/test/certdata/capath/99d0fa06.0
 -rw-r--r--	root/root	usr/lib/python3.12/test/certdata/capath/b1930218.0
 -rw-r--r--	root/root	usr/lib/python3.12/test/certdata/capath/ceff1710.0
+-rw-r--r--	root/root	usr/lib/python3.12/test/certdata/distrusted.zip
 -rw-r--r--	root/root	usr/lib/python3.12/test/certdata/ffdh3072.pem
 -rw-r--r--	root/root	usr/lib/python3.12/test/certdata/idnsans.pem
 -rw-r--r--	root/root	usr/lib/python3.12/test/certdata/keycert.passwd.pem
